@@ -182,11 +182,11 @@ public partial class InternetsysContext : DbContext
 
         modelBuilder.Entity<Contract>(entity =>
         {
-            entity.HasKey(e => e.Contracit).HasName("PK__contract__2ECBB3AB81D1A786");
+            entity.HasKey(e => e.Contracid).HasName("PK__contract__2ECBB3AB81D1A786");
 
             entity.ToTable("contract");
 
-            entity.Property(e => e.Contracit)
+            entity.Property(e => e.Contracid)
                 .ValueGeneratedNever()
                 .HasColumnName("contracit");
             entity.Property(e => e.ClientClientid).HasColumnName("client_clientid");
@@ -371,9 +371,6 @@ public partial class InternetsysContext : DbContext
             entity.Property(e => e.Creationdate)
                 .HasColumnType("datetime")
                 .HasColumnName("creationdate");
-            entity.Property(e => e.Dateapproval)
-                .HasColumnType("datetime")
-                .HasColumnName("dateapproval");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -383,8 +380,6 @@ public partial class InternetsysContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("password");
             entity.Property(e => e.RolRolid).HasColumnName("rol_rolid");
-            entity.Property(e => e.Userapproval).HasColumnName("userapproval");
-            entity.Property(e => e.Usercreate).HasColumnName("usercreate");
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false)
