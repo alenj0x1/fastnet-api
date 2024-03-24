@@ -35,6 +35,10 @@ namespace fastnet_api.Controllers
                 return Unauthorized();
             }
 
+            if (result.Token == null) {
+                return BadRequest(result);
+            }
+
             return Ok(result);
         }
     }

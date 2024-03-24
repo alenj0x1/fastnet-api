@@ -1,5 +1,6 @@
 ﻿using fastnet_api.DBModels;
 using fastnet_api.Models.Authentication;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -55,6 +56,11 @@ namespace fastnet_api.Services
             {
                 return await Task.FromResult<LoginResponse>(null);
             }
+
+            if (FindUser.Password != authorization.password)
+            {
+                return new LoginResponse() { Result = false, Msg = "Username or password incorrect" };
+            };
 
             string tokenCreated = generateToken(authorization.username);
 
