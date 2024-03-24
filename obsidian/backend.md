@@ -4,10 +4,9 @@
 ## /authentication
 
 
-| ruta    | descripción                          | params | query | body             | metodo | rol necesario |
-| ------- | ------------------------------------ | ------ | ----- | ---------------- | ------ | ------------- |
-| /       | Autenticar a un gestor o a un Cajero | -      | -     | userId, password | post   | -             |
-| /logout | Cierre de sesión de gestor o Cajero  | -      | -     | -                | get    | -             |
+| ruta | descripción           | params | query | body             | metodo | rol necesario |
+| ---- | --------------------- | ------ | ----- | ---------------- | ------ | ------------- |
+| /    | Autenticar un usuario | -      | -     | userId, password | post   | -             |
 
 ## /users
 
