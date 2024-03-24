@@ -11,7 +11,7 @@ public partial class Attention
 
     public int ClientClientid { get; set; }
 
-    public string AttentiontypeAttentiontypeid { get; set; } = null!;
+    public int AttentiontypeAttentiontypeid { get; set; }
 
     public int AttentionstatusStatusid { get; set; }
 

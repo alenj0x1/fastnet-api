@@ -5,7 +5,7 @@ namespace fastnet_api.DBModels;
 
 public partial class Statuscontract
 {
-    public string Statusid { get; set; } = null!;
+    public int Statusid { get; set; }
 
     public string Description { get; set; } = null!;
 

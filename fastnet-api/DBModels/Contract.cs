@@ -5,7 +5,7 @@ namespace fastnet_api.DBModels;
 
 public partial class Contract
 {
-    public int Contracit { get; set; }
+    public int Contracid { get; set; }
 
     public DateTime Startdate { get; set; }
 
@@ -13,7 +13,7 @@ public partial class Contract
 
     public int ServiceServiceid { get; set; }
 
-    public string StatuscontractStatusid { get; set; } = null!;
+    public int StatuscontractStatusid { get; set; }
 
     public int ClientClientid { get; set; }
 

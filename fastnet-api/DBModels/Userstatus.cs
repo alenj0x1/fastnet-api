@@ -5,7 +5,7 @@ namespace fastnet_api.DBModels;
 
 public partial class Userstatus
 {
-    public string Statusid { get; set; } = null!;
+    public int Statusid { get; set; }
 
     public string Description { get; set; } = null!;
 

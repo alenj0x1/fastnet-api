@@ -5,7 +5,7 @@ namespace fastnet_api.DBModels;
 
 public partial class Attentiontype
 {
-    public string Attentiontypeid { get; set; } = null!;
+    public int Attentiontypeid { get; set; }
 
     public string Description { get; set; } = null!;
 
