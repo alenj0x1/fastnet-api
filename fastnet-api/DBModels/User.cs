@@ -19,6 +19,8 @@ public partial class User
 
     public int? UserstatusStatusid { get; set; }
 
+    public virtual ICollection<HistoryRefreshToken> HistoryRefreshTokens { get; set; } = new List<HistoryRefreshToken>();
+
     public virtual Rol RolRol { get; set; } = null!;
 
     public virtual Userstatus? UserstatusStatus { get; set; }

@@ -29,6 +29,8 @@ public partial class FastnetdbContext : DbContext
 
     public virtual DbSet<Device> Devices { get; set; }
 
+    public virtual DbSet<HistoryRefreshToken> HistoryRefreshTokens { get; set; }
+
     public virtual DbSet<Methodpayment> Methodpayments { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
@@ -222,6 +224,37 @@ public partial class FastnetdbContext : DbContext
                 .HasForeignKey(d => d.Serviceid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__device__servicei__46E78A0C");
+        });
+
+        modelBuilder.Entity<HistoryRefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Historytokenid).HasName("PK__historyR__022D049D5D731F5A");
+
+            entity.ToTable("historyRefreshToken");
+
+            entity.Property(e => e.Historytokenid).HasColumnName("historytokenid");
+            entity.Property(e => e.Created)
+                .HasColumnType("datetime")
+                .HasColumnName("created");
+            entity.Property(e => e.Expire)
+                .HasColumnType("datetime")
+                .HasColumnName("expire");
+            entity.Property(e => e.Isactive)
+                .HasComputedColumnSql("(case when [expire]<getdate() then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)", false)
+                .HasColumnName("isactive");
+            entity.Property(e => e.Refreshtoken)
+                .HasMaxLength(200)
+                .IsUnicode(false)
+                .HasColumnName("refreshtoken");
+            entity.Property(e => e.Token)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("token");
+            entity.Property(e => e.Userid).HasColumnName("userid");
+
+            entity.HasOne(d => d.User).WithMany(p => p.HistoryRefreshTokens)
+                .HasForeignKey(d => d.Userid)
+                .HasConstraintName("FK__historyRe__useri__6FE99F9F");
         });
 
         modelBuilder.Entity<Methodpayment>(entity =>

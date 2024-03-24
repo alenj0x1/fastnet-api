@@ -1,7 +1,13 @@
 ﻿using fastnet_api.Bll;
 using fastnet_api.DBModels;
 using fastnet_api.Models.Authentication;
+using fastnet_api.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,27 +17,25 @@ namespace fastnet_api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private AuthenticationBll AuthenticationB;
-        private readonly FastnetdbContext _db;
+        private readonly IAuthService _authorizationService;
 
-        public AuthenticationController(FastnetdbContext dbFastnetContext)
+        public AuthenticationController(IAuthService authenticationService)
         {
-            _db = dbFastnetContext;
-            AuthenticationB = new AuthenticationBll(dbFastnetContext);
+            _authorizationService = authenticationService;
         }
 
-        // POST api/<ValuesController>
-        [HttpPost("/login")]
-        public IActionResult Post([FromBody] LoginRequestModel value)
+        // POST api/<AuthentcationController>/login
+        [HttpPost]
+        public async Task<ActionResult> Login([FromBody] LoginRequestModel authorization)
         {
-            User? LoginUser = AuthenticationB.LoginUser(value);
+            var result = await _authorizationService.ReturnToken(authorization);
 
-            if (LoginUser == null)
+            if (result == null)
             {
-                return BadRequest("User or password incorrect.");
+                return Unauthorized();
             }
 
-            return Ok(LoginUser);
+            return Ok(result);
         }
     }
 }

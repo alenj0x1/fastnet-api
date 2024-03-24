@@ -142,6 +142,16 @@ CREATE TABLE contract (
 )
 GO
 
+CREATE TABLE historyRefreshToken(
+	historytokenid INT IDENTITY PRIMARY KEY,
+	userid INT REFERENCES users(userid),
+	token VARCHAR(500),
+	refreshtoken VARCHAR(200),
+	created DATETIME,
+	expire DATETIME,
+	isactive AS (iif(expire < getdate(), convert(bit, 0), convert(bit, 1)))
+)
+
 -- Roles
 INSERT INTO rol (rolname)
 VALUES ('manager')
