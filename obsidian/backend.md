@@ -2,39 +2,43 @@
 # Rútas
 
 ## /authentication
-
+✅
 
 | ruta | descripción           | params | query | body             | metodo | rol necesario |
 | ---- | --------------------- | ------ | ----- | ---------------- | ------ | ------------- |
 | /    | Autenticar un usuario | -      | -     | userId, password | post   | -             |
 
 ## /users
+✅
 
 | ruta                  | descripción                         | params | query | body            | metodo | rol necesario |
 | --------------------- | ----------------------------------- | ------ | ----- | --------------- | ------ | ------------- |
 | /                     | Todos los usuarios de la aplicación | -      | -     | -               | get    | -             |
 | /:userId              | Obtener un usuario                  | userId | -     | -               | get    | -             |
-| /assignCash/:userId   | Asignar una caja a un cajero        | userId | -     | -               | get    | gestor        |
+| /assignCash/          | Asignar una caja a un cajero        | -      | -     | userId, cashId  | post   | gestor        |
 | /createCajero         | Crea un nuevo cajero                | -      | -     | username, email | post   | gestor        |
-| /removeCajero/:userId | Remueve un cajero                   | userId |       | -               | delete | gestor        |
+| /removeCajero/:userId | Remueve un cajero                   | userId | -     | -               | delete | gestor        |
 
 ### /cash
+✅
 
 | ruta                       | descripción                           | params | query | body | metodo | rol necesario |
 | -------------------------- | ------------------------------------- | ------ | ----- | ---- | ------ | ------------- |
 | /                          | Obtener todas las cajas               |        | -     | -    | get    | -             |
 | /:cashId                   | Obtener una caja por su ID            | cashId | -     | -    | get    | -             |
 | /getCashByCajeroId/:userId | Obtener una caja por la ID del cajero | userId | -     | -    | get    | -             |
-| /getCashByGestorId/:userId | Obtener una caja por la ID del gestor | userId | -     | -    | get    | -             |
+
 
 ## /attention
+✅
 
-| ruta                           | descripción                       | params      | query | body            | metodo | rol necesario |
-| ------------------------------ | --------------------------------- | ----------- | ----- | --------------- | ------ | ------------- |
-| /:clientId                     | Obtiene la atención actual        | clientId    | -     | -               | -      | -             |
-| /getAttentionById/:attentionId | Obtiene una atención por Id       | atentionId  | -     | -               | get    | cajero        |
-| /new                           | Crear una nueva atención          | -           | -     | userId          | post   | -             |
-| /closeAttention/:attentionId   | Finalizar la atención del cliente | attentionId | -     | userId (cajero) | put    | cajero        |
+| ruta                              | descripción                       | params      | query | body            | metodo | rol necesario |
+| --------------------------------- | --------------------------------- | ----------- | ----- | --------------- | ------ | ------------- |
+| /getAttentionByClientId/:clientId | Obtiene la atención actual        | clientId    | -     | -               | -      | -             |
+| /getAttentionById/:attentionId    | Obtiene una atención por Id       | atentionId  | -     | -               | get    | -             |
+| /new                              | Crear una nueva atención          | -           | -     | userId          | post   | -             |
+| /closeAttention/:attentionId      | Finalizar la atención del cliente | attentionId | -     | userId (cajero) | get    | -             |
+| /                                 | Obtener todas las atenciones      | -           | -     | -               | -      | cajero        |
 ## /turn
 
 | ruta              | descripción                                     | params | query              | body | metodo | rol necesario |

@@ -85,20 +85,19 @@ GO
 
 CREATE TABLE turn (
 	turnid INT IDENTITY PRIMARY KEY,
-	description VARCHAR(50) NOT NULL,
-	date DATETIME NOT NULL,
+	description VARCHAR(50) DEFAULT 'without description.',
+	date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	cash_cashid INT NOT NULL,
 	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid),
 	usergestorid INT NOT NULL
 )
-GO
+GO	
 
 CREATE TABLE attention (
 	attentionid INT IDENTITY PRIMARY KEY,
 	turn_turnid INT NOT NULL,
 	FOREIGN KEY (turn_turnid) REFERENCES turn(turnid),
-	client_clientid INT NOT NULL,
-	FOREIGN KEY (client_clientid) REFERENCES client(clientid),
+	client_clientid INT,
 	attentiontype_attentiontypeid INT NOT NULL,
 	FOREIGN KEY (attentiontype_attentiontypeid) REFERENCES attentiontype(attentiontypeid),
 	attentionstatus_statusid INT NOT NULL,

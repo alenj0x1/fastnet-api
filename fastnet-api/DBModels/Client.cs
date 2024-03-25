@@ -21,8 +21,6 @@ public partial class Client
 
     public string Referenceaddress { get; set; } = null!;
 
-    public virtual ICollection<Attention> Attentions { get; set; } = new List<Attention>();
-
     public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();

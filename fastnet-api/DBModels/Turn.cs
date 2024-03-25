@@ -7,9 +7,9 @@ public partial class Turn
 {
     public int Turnid { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateTime? Date { get; set; }
 
     public int CashCashid { get; set; }
 
