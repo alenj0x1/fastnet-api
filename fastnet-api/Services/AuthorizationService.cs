@@ -20,13 +20,13 @@ namespace fastnet_api.Services
             _configuration = configuration;
         }
 
-        private string generateToken(string userId)
+        private string generateToken(int userId)
         {
             string key = _configuration.GetValue<string>("JwtSettings:key");
             var keyBytes = Encoding.ASCII.GetBytes(key);
 
             var claims = new ClaimsIdentity();
-            claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId));
+            claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId.ToString()));
 
             var credentialsToken = new SigningCredentials(
                 new SymmetricSecurityKey(keyBytes),
@@ -48,6 +48,15 @@ namespace fastnet_api.Services
             return createdToken;
         }
 
+        private int readToken(string token)
+        {
+            JwtSecurityTokenHandler tokenHandler = new();
+            JwtSecurityToken tokenJWT = tokenHandler.ReadJwtToken(token);
+            int userId = int.Parse(tokenJWT.Claims.First(claim => claim.Type == "nameid").Value);
+
+            return userId;
+        }
+
         public async Task<LoginResponse> ReturnToken(LoginRequestModel authorization)
         {
             User? FindUser = _context.Users.SingleOrDefault(user => user.Username == authorization.username);
@@ -62,9 +71,14 @@ namespace fastnet_api.Services
                 return new LoginResponse() { Result = false, Msg = "Username or password incorrect" };
             };
 
-            string tokenCreated = generateToken(authorization.username);
+            string tokenCreated = generateToken(FindUser.Userid);
 
             return new LoginResponse() { Token = tokenCreated, Result = true, Msg = "token created!"};
+        }
+
+        public int ReadToken(string token)
+        {
+            return readToken(token);
         }
     }
 }

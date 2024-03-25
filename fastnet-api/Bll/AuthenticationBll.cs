@@ -7,8 +7,9 @@ namespace fastnet_api.Bll
     public class AuthenticationBll
     {
         FastnetdbContext ContextDB;
-        public AuthenticationBll(FastnetdbContext _Context) {
-            ContextDB = _Context;
+        public AuthenticationBll()
+        {
+            ContextDB = new FastnetdbContext();
         }
 
         UserRepository UserRep = new();

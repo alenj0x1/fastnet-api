@@ -7,9 +7,9 @@ public partial class Contract
 {
     public int Contracid { get; set; }
 
-    public DateTime Startdate { get; set; }
+    public DateTime? Startdate { get; set; }
 
-    public DateTime Enddate { get; set; }
+    public DateTime? Enddate { get; set; }
 
     public int ServiceServiceid { get; set; }
 

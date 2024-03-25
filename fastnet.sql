@@ -36,8 +36,8 @@ GO
 
 CREATE TABLE cash (
 	cashid INT IDENTITY PRIMARY KEY,
-	cashdescription VARCHAR(50) NOT NULL,
-	active VARCHAR(1) NOT NULL
+	cashdescription VARCHAR(50) DEFAULT 'without description',
+	active BIT DEFAULT 1
 )
 GO
 
@@ -85,7 +85,7 @@ GO
 
 CREATE TABLE turn (
 	turnid INT IDENTITY PRIMARY KEY,
-	description VARCHAR(7) NOT NULL,
+	description VARCHAR(50) NOT NULL,
 	date DATETIME NOT NULL,
 	cash_cashid INT NOT NULL,
 	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid),
@@ -120,7 +120,7 @@ CREATE TABLE users (
 GO
 
 CREATE TABLE usercash (
-	user_userid INT NOT NULL,
+	user_userid INT NOT NULL UNIQUE,
 	FOREIGN KEY (user_userid) REFERENCES users(userid),
 	cash_cashid INT NOT NULL,
 	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid)
@@ -129,8 +129,8 @@ GO
 
 CREATE TABLE contract (
 	contracid INT IDENTITY PRIMARY KEY,
-	startdate DATETIME NOT NULL,
-	enddate DATETIME NOT NULL,
+	startdate DATETIME DEFAULT CURRENT_TIMESTAMP,
+	enddate DATETIME DEFAULT CURRENT_TIMESTAMP,
 	service_serviceid INT NOT NULL,
 	FOREIGN KEY (service_serviceid) REFERENCES service(serviceid),
 	statuscontract_statusid INT NOT NULL,
@@ -141,16 +141,6 @@ CREATE TABLE contract (
 	FOREIGN KEY (methodpayment_methodpaymentid) REFERENCES methodpayment(methodpaymentid)
 )
 GO
-
-CREATE TABLE historyRefreshToken(
-	historytokenid INT IDENTITY PRIMARY KEY,
-	userid INT REFERENCES users(userid),
-	token VARCHAR(500),
-	refreshtoken VARCHAR(200),
-	created DATETIME,
-	expire DATETIME,
-	isactive AS (iif(expire < getdate(), convert(bit, 0), convert(bit, 1)))
-)
 
 -- Roles
 INSERT INTO rol (rolname)
