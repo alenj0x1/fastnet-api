@@ -24,6 +24,28 @@ namespace fastnet_api.Bll
             return CashRep.CreateCash(ContextDB, newCash);
         }
 
+        public Boolean RemoveCash(int cashId)
+        {
+            Cash? FindCash = ContextDB.Cashes.SingleOrDefault(x => x.Cashid == cashId);
+
+            if (FindCash == null) {
+                return false;
+            }
+
+            CashRep.RemoveCash(ContextDB, FindCash);
+            return true;
+        }
+
+        public Cash? GetCashById(int cashId)
+        {
+            return CashRep.GetCashById(ContextDB, cashId);
+        }
+
+        public Cash? GetCashByCashierId(int cashierId)
+        {
+            return CashRep.GetCashByCashierId(ContextDB, cashierId);
+        }
+
         public List<Cash> GetCashes()
         {
             return CashRep.GetCashes(ContextDB);

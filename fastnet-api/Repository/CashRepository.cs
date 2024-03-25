@@ -9,6 +9,23 @@ namespace fastnet_api.Repository
             return contextDB.Cashes.ToList();
         }
 
+        public Cash? GetCashById(FastnetdbContext contextDB, int cashId)
+        {
+            return contextDB.Cashes.SingleOrDefault(x => x.Cashid == cashId);
+        }
+
+        public Cash? GetCashByCashierId(FastnetdbContext contextDB, int cashierId)
+        {
+            Usercash? CashierCash = contextDB.Usercashes.SingleOrDefault(x => x.UserUserid == cashierId);
+
+            if (CashierCash == null)
+            {
+                return null;
+            }
+
+            return GetCashById(contextDB, CashierCash.CashCashid);
+        }
+
         public Cash CreateCash(FastnetdbContext contextDB, Cash newCash)
         {
             contextDB.Add(newCash);
@@ -16,6 +33,13 @@ namespace fastnet_api.Repository
             contextDB.SaveChanges();
 
             return newCash;
+        }
+
+        public Cash RemoveCash(FastnetdbContext contextDB, Cash cash) {
+            contextDB.Remove(cash);
+            contextDB.SaveChanges();
+
+            return cash;
         }
 
         public Cash? AssignCash(FastnetdbContext contextDB, int cashId, int userId)
