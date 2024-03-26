@@ -60,6 +60,9 @@ namespace fastnet_api.Repository
                 return null;
             }
 
+            // Update status of cash
+            FindCash.Active = true;
+
             Usercash? FindUserCash = contextDB.Usercashes.SingleOrDefault(x => x.UserUserid == userId);
 
             // Update user cash

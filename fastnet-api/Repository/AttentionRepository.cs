@@ -40,6 +40,7 @@ namespace fastnet_api.Repository
             {
                 CashCashid = model.CashId,
                 Usergestorid = 1,
+                Turnstatusid = 1, // waiting
             };
             ContextDB.Turns.Add(NewTurn);
             ContextDB.SaveChanges();
@@ -91,6 +92,23 @@ namespace fastnet_api.Repository
             ContextDB.SaveChanges();
 
             return 1;
+        }
+
+        public Attention? GetAttentionByTurnId(FastnetdbContext ContextDB, int turnId)
+        {
+            Attention? FindAttention = ContextDB.Attentions.SingleOrDefault(x => x.TurnTurnid == turnId);
+
+            if (FindAttention == null)
+            {
+                return null;
+            }
+
+            return FindAttention;
+        }
+
+        public Attention? GetAttentionTakedByCashier(FastnetdbContext ContextDB, int turnId, int cashierId)
+        {
+            return new Attention();
         }
     }
 }

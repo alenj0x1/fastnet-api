@@ -83,15 +83,22 @@ CREATE TABLE payments (
 )
 GO
 
+CREATE TABLE turnstatus (
+	statusid INT IDENTITY PRIMARY KEY,
+	description VARCHAR(30) NOT NULL
+)
+GO
+
 CREATE TABLE turn (
 	turnid INT IDENTITY PRIMARY KEY,
-	description VARCHAR(50) DEFAULT 'without description.',
+	turnstatusid INT DEFAULT 1,
 	date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	cash_cashid INT NOT NULL,
 	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid),
+	FOREIGN KEY (turnstatusid) REFERENCES turnstatus(statusid),
 	usergestorid INT NOT NULL
 )
-GO	
+GO
 
 CREATE TABLE attention (
 	attentionid INT IDENTITY PRIMARY KEY,
@@ -122,7 +129,8 @@ CREATE TABLE usercash (
 	user_userid INT NOT NULL UNIQUE,
 	FOREIGN KEY (user_userid) REFERENCES users(userid),
 	cash_cashid INT NOT NULL,
-	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid)
+	FOREIGN KEY (cash_cashid) REFERENCES cash(cashid),
+	PRIMARY KEY (user_userid, cash_cashid)
 )
 GO
 
@@ -225,6 +233,19 @@ VALUES ('taked')
 GO
 
 INSERT INTO attentionstatus (description)
+VALUES ('ended')
+GO
+
+-- Turn status
+INSERT INTO turnstatus (description)
+VALUES ('waiting')
+GO
+
+INSERT INTO turnstatus (description)
+VALUES ('taked')
+GO
+
+INSERT INTO turnstatus (description)
 VALUES ('ended')
 GO
 

@@ -41,6 +41,8 @@ public partial class FastnetdbContext : DbContext
 
     public virtual DbSet<Turn> Turns { get; set; }
 
+    public virtual DbSet<Turnstatus> Turnstatuses { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Usercash> Usercashes { get; set; }
@@ -55,7 +57,7 @@ public partial class FastnetdbContext : DbContext
     {
         modelBuilder.Entity<Attention>(entity =>
         {
-            entity.HasKey(e => e.Attentionid).HasName("PK__attentio__99FD35529FEF1197");
+            entity.HasKey(e => e.Attentionid).HasName("PK__attentio__99FD3552FDE34087");
 
             entity.ToTable("attention");
 
@@ -68,22 +70,22 @@ public partial class FastnetdbContext : DbContext
             entity.HasOne(d => d.AttentionstatusStatus).WithMany(p => p.Attentions)
                 .HasForeignKey(d => d.AttentionstatusStatusid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__attention__atten__571DF1D5");
+                .HasConstraintName("FK__attention__atten__59FA5E80");
 
             entity.HasOne(d => d.AttentiontypeAttentiontype).WithMany(p => p.Attentions)
                 .HasForeignKey(d => d.AttentiontypeAttentiontypeid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__attention__atten__5629CD9C");
+                .HasConstraintName("FK__attention__atten__59063A47");
 
             entity.HasOne(d => d.TurnTurn).WithMany(p => p.Attentions)
                 .HasForeignKey(d => d.TurnTurnid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__attention__turn___5535A963");
+                .HasConstraintName("FK__attention__turn___5812160E");
         });
 
         modelBuilder.Entity<Attentionstatus>(entity =>
         {
-            entity.HasKey(e => e.Statusid).HasName("PK__attentio__36247E30611E2A33");
+            entity.HasKey(e => e.Statusid).HasName("PK__attentio__36247E3007DF9CEE");
 
             entity.ToTable("attentionstatus");
 
@@ -96,7 +98,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Attentiontype>(entity =>
         {
-            entity.HasKey(e => e.Attentiontypeid).HasName("PK__attentio__9D38AAA32A90C931");
+            entity.HasKey(e => e.Attentiontypeid).HasName("PK__attentio__9D38AAA3AD1BCF40");
 
             entity.ToTable("attentiontype");
 
@@ -109,7 +111,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Cash>(entity =>
         {
-            entity.HasKey(e => e.Cashid).HasName("PK__cash__96014CBDB8B61609");
+            entity.HasKey(e => e.Cashid).HasName("PK__cash__96014CBD7E08FF55");
 
             entity.ToTable("cash");
 
@@ -126,7 +128,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.Clientid).HasName("PK__client__819DC769155EF664");
+            entity.HasKey(e => e.Clientid).HasName("PK__client__819DC769349B4D13");
 
             entity.ToTable("client");
 
@@ -163,7 +165,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Contract>(entity =>
         {
-            entity.HasKey(e => e.Contracid).HasName("PK__contract__2ECBB3DBA608B5E6");
+            entity.HasKey(e => e.Contracid).HasName("PK__contract__2ECBB3DBBD7B332A");
 
             entity.ToTable("contract");
 
@@ -184,27 +186,27 @@ public partial class FastnetdbContext : DbContext
             entity.HasOne(d => d.ClientClient).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.ClientClientid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__contract__client__66603565");
+                .HasConstraintName("FK__contract__client__6A30C649");
 
             entity.HasOne(d => d.MethodpaymentMethodpayment).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.MethodpaymentMethodpaymentid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__contract__method__6754599E");
+                .HasConstraintName("FK__contract__method__6B24EA82");
 
             entity.HasOne(d => d.ServiceService).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.ServiceServiceid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__contract__servic__6477ECF3");
+                .HasConstraintName("FK__contract__servic__68487DD7");
 
             entity.HasOne(d => d.StatuscontractStatus).WithMany(p => p.Contracts)
                 .HasForeignKey(d => d.StatuscontractStatusid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__contract__status__656C112C");
+                .HasConstraintName("FK__contract__status__693CA210");
         });
 
         modelBuilder.Entity<Device>(entity =>
         {
-            entity.HasKey(e => e.Deviceid).HasName("PK__device__84B9F7FF7649B978");
+            entity.HasKey(e => e.Deviceid).HasName("PK__device__84B9F7FF9CC88B5F");
 
             entity.ToTable("device");
 
@@ -223,7 +225,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Methodpayment>(entity =>
         {
-            entity.HasKey(e => e.Methodpaymentid).HasName("PK__methodpa__633563A493F8BEF7");
+            entity.HasKey(e => e.Methodpaymentid).HasName("PK__methodpa__633563A4FD64D00D");
 
             entity.ToTable("methodpayment");
 
@@ -236,7 +238,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Paymentid).HasName("PK__payments__AF26EBEE18C20925");
+            entity.HasKey(e => e.Paymentid).HasName("PK__payments__AF26EBEE2EE5F3E6");
 
             entity.ToTable("payments");
 
@@ -254,7 +256,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.Rolid).HasName("PK__rol__5403326CD21BCB1B");
+            entity.HasKey(e => e.Rolid).HasName("PK__rol__5403326C84B78551");
 
             entity.ToTable("rol");
 
@@ -267,7 +269,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.Serviceid).HasName("PK__service__45516CA7F2B6FAFD");
+            entity.HasKey(e => e.Serviceid).HasName("PK__service__45516CA7F1D17059");
 
             entity.ToTable("service");
 
@@ -288,7 +290,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Statuscontract>(entity =>
         {
-            entity.HasKey(e => e.Statusid).HasName("PK__statusco__36247E3071A223E3");
+            entity.HasKey(e => e.Statusid).HasName("PK__statusco__36247E3060E8A9A6");
 
             entity.ToTable("statuscontract");
 
@@ -301,7 +303,7 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Turn>(entity =>
         {
-            entity.HasKey(e => e.Turnid).HasName("PK__turn__C2FE6222D2E68138");
+            entity.HasKey(e => e.Turnid).HasName("PK__turn__C2FE622235EEC4FE");
 
             entity.ToTable("turn");
 
@@ -311,22 +313,37 @@ public partial class FastnetdbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("date");
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasDefaultValue("without description.")
-                .HasColumnName("description");
+            entity.Property(e => e.Turnstatusid)
+                .HasDefaultValue(1)
+                .HasColumnName("turnstatusid");
             entity.Property(e => e.Usergestorid).HasColumnName("usergestorid");
 
             entity.HasOne(d => d.CashCash).WithMany(p => p.Turns)
                 .HasForeignKey(d => d.CashCashid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__turn__cash_cashi__52593CB8");
+                .HasConstraintName("FK__turn__cash_cashi__5441852A");
+
+            entity.HasOne(d => d.Turnstatus).WithMany(p => p.Turns)
+                .HasForeignKey(d => d.Turnstatusid)
+                .HasConstraintName("FK__turn__turnstatus__5535A963");
+        });
+
+        modelBuilder.Entity<Turnstatus>(entity =>
+        {
+            entity.HasKey(e => e.Statusid).HasName("PK__turnstat__36247E309B8F918C");
+
+            entity.ToTable("turnstatus");
+
+            entity.Property(e => e.Statusid).HasColumnName("statusid");
+            entity.Property(e => e.Description)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasColumnName("description");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Userid).HasName("PK__users__CBA1B257CBB72A83");
+            entity.HasKey(e => e.Userid).HasName("PK__users__CBA1B257008BA163");
 
             entity.ToTable("users");
 
@@ -353,38 +370,38 @@ public partial class FastnetdbContext : DbContext
             entity.HasOne(d => d.RolRol).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RolRolid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__users__rol_rolid__59FA5E80");
+                .HasConstraintName("FK__users__rol_rolid__5CD6CB2B");
 
             entity.HasOne(d => d.UserstatusStatus).WithMany(p => p.Users)
                 .HasForeignKey(d => d.UserstatusStatusid)
-                .HasConstraintName("FK__users__userstatu__5BE2A6F2");
+                .HasConstraintName("FK__users__userstatu__5EBF139D");
         });
 
         modelBuilder.Entity<Usercash>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("usercash");
+            entity.HasKey(e => new { e.UserUserid, e.CashCashid }).HasName("PK__usercash__1C0BBE18A533AD5A");
 
-            entity.HasIndex(e => e.UserUserid, "UQ__usercash__436BE0FAF9FAFD68").IsUnique();
+            entity.ToTable("usercash");
 
-            entity.Property(e => e.CashCashid).HasColumnName("cash_cashid");
+            entity.HasIndex(e => e.UserUserid, "UQ__usercash__436BE0FAA41452F3").IsUnique();
+
             entity.Property(e => e.UserUserid).HasColumnName("user_userid");
+            entity.Property(e => e.CashCashid).HasColumnName("cash_cashid");
 
-            entity.HasOne(d => d.CashCash).WithMany()
+            entity.HasOne(d => d.CashCash).WithMany(p => p.Usercashes)
                 .HasForeignKey(d => d.CashCashid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__usercash__cash_c__5FB337D6");
+                .HasConstraintName("FK__usercash__cash_c__6383C8BA");
 
-            entity.HasOne(d => d.UserUser).WithOne()
+            entity.HasOne(d => d.UserUser).WithOne(p => p.Usercash)
                 .HasForeignKey<Usercash>(d => d.UserUserid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__usercash__user_u__5EBF139D");
+                .HasConstraintName("FK__usercash__user_u__628FA481");
         });
 
         modelBuilder.Entity<Userstatus>(entity =>
         {
-            entity.HasKey(e => e.Statusid).HasName("PK__userstat__36247E305EC4D201");
+            entity.HasKey(e => e.Statusid).HasName("PK__userstat__36247E30D32C3A3F");
 
             entity.ToTable("userstatus");
 

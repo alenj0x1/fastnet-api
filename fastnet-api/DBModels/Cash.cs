@@ -12,4 +12,6 @@ public partial class Cash
     public bool? Active { get; set; }
 
     public virtual ICollection<Turn> Turns { get; set; } = new List<Turn>();
+
+    public virtual ICollection<Usercash> Usercashes { get; set; } = new List<Usercash>();
 }

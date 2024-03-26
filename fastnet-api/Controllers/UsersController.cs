@@ -1,5 +1,6 @@
 ﻿using fastnet_api.Bll;
 using fastnet_api.DBModels;
+using fastnet_api.Helper;
 using fastnet_api.Models.Users;
 using fastnet_api.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -52,10 +53,7 @@ namespace fastnet_api.Controllers
         [Route("assignCash")]
         public ActionResult<Cash?> AssignCash([FromBody] AssignCashRequestModel model)
         {
-            string Token = HttpContext.Request.Headers["authorization"].ToString().Substring("Bearer ".Length).Trim();
-            var TokenUser = _authorizationService.ReadToken(Token);
-
-            User? UserRequest = UserB.GetUser(TokenUser);
+            User? UserRequest = new ManageToken(HttpContext, _authorizationService).GetUser();
      
             User? FindUser = UserB.GetUser(model.userId);
 

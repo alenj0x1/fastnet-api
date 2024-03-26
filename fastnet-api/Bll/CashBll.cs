@@ -20,6 +20,7 @@ namespace fastnet_api.Bll
             Cash newCash = new()
             {
                Cashdescription = model.Description,
+               Active = false,
             };
             return CashRep.CreateCash(ContextDB, newCash);
         }

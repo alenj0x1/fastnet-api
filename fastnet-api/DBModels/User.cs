@@ -21,5 +21,7 @@ public partial class User
 
     public virtual Rol RolRol { get; set; } = null!;
 
+    public virtual Usercash? Usercash { get; set; }
+
     public virtual Userstatus? UserstatusStatus { get; set; }
 }

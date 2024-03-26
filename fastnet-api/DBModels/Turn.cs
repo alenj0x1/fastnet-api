@@ -7,7 +7,7 @@ public partial class Turn
 {
     public int Turnid { get; set; }
 
-    public string? Description { get; set; }
+    public int? Turnstatusid { get; set; }
 
     public DateTime? Date { get; set; }
 
@@ -18,4 +18,6 @@ public partial class Turn
     public virtual ICollection<Attention> Attentions { get; set; } = new List<Attention>();
 
     public virtual Cash CashCash { get; set; } = null!;
+
+    public virtual Turnstatus? Turnstatus { get; set; }
 }
