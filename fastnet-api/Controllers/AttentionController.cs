@@ -65,9 +65,9 @@ namespace fastnet_api.Controllers
 
         [HttpGet]
         [Route("closeAttention/{attentionId}")]
-        public ActionResult<int?> RemoveAttention(int attentionId)
+        public ActionResult<int?> CloseAttention(int attentionId)
         {
-           int? AttentionRemoved = AttentionB.RemoveAttention(attentionId);
+           int? AttentionRemoved = AttentionB.CloseAttention(attentionId);
 
             if (AttentionRemoved == null)
             {

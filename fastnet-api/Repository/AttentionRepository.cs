@@ -79,7 +79,7 @@ namespace fastnet_api.Repository
             return ContextDB.Attentions.SingleOrDefault(x => x.ClientClientid == clientId);
         }
 
-        public int? RemoveAttention(FastnetdbContext ContextDB, int attentionId)
+        public int? CloseAttention(FastnetdbContext ContextDB, int attentionId)
         {
             Attention? FindAttention = GetAttentionById(ContextDB, attentionId);
 
@@ -88,7 +88,16 @@ namespace fastnet_api.Repository
                 return null;
             }
 
-            ContextDB.Attentions.Remove(FindAttention);
+            if (FindAttention.AttentionstatusStatusid == 3)
+            {
+                return null;
+            }
+
+            Turn? FindTurn = ContextDB.Turns.SingleOrDefault(x => x.Turnid == FindAttention.TurnTurnid);
+
+            FindTurn.Turnstatusid = 3; // ended
+            FindAttention.AttentionstatusStatusid = 3; // ended
+
             ContextDB.SaveChanges();
 
             return 1;

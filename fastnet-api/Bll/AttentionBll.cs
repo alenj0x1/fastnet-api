@@ -37,9 +37,9 @@ namespace fastnet_api.Bll
             return AttentionRep.GetAttentionByClientId(ContextDB, clientId);
         }
 
-        public int? RemoveAttention(int attentionId)
+        public int? CloseAttention(int attentionId)
         {
-            return AttentionRep.RemoveAttention(ContextDB, attentionId);
+            return AttentionRep.CloseAttention(ContextDB, attentionId);
         }
     }
 }
