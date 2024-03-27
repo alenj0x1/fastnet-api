@@ -54,7 +54,7 @@ namespace fastnet_api.Bll
 
         public Cash? AssignCash(AssignCashRequestModel model)
         {
-            return CashRep.AssignCash(ContextDB, model.cashId, model.userId);
+            return CashRep.AssignCash(ContextDB, model);
         }
 
         public Usercash? RemoveAssignedCash(int userId) { 

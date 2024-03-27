@@ -29,7 +29,7 @@ namespace fastnet_api.Controllers
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
-            return UserB.GetUsers();
+            return Ok(UserB.GetUsers());
         }
 
         // Get user by ID
@@ -65,7 +65,6 @@ namespace fastnet_api.Controllers
 
             // User id invalid
             if (FindUser == null) {
-                Console.WriteLine("user id invalid");
                 return BadRequest("user id invalid");
             }
 
@@ -73,14 +72,12 @@ namespace fastnet_api.Controllers
 
             // Without cashiers
             if (FindCashiers.Count == 0) {
-                Console.Write("without cashiers");
                 return NotFound("without cashiers");
             }
 
             // Same user
             if (FindUser.Userid == UserRequest.Userid)
             {
-                Console.Write("same user");
                 return BadRequest("you cannot assign yourself a cash");
             }
 
@@ -88,7 +85,7 @@ namespace fastnet_api.Controllers
 
             if (newAssignedCash == null)
             {
-                return BadRequest("invalid cash or without cash created. Create one");
+                return BadRequest("3 users by cash, invalid cash, without cash created. Create one");
             }
 
             return Ok(newAssignedCash);

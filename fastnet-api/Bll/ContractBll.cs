@@ -18,5 +18,25 @@ namespace fastnet_api.Bll
         {
             return ContractRep.NewContract(ContextDB, model);
         }
+
+        public Contract? GetContractById(int contractId)
+        {
+            return ContractRep.GetContractById(ContextDB, contractId);
+        }
+
+        public Contract? GetContractByClientId(int clientId)
+        {
+            return ContractRep.GetContractByClientId(ContextDB, clientId);
+        }
+
+        public Contract? UpdateContract(UpdateContractRequestModel model)
+        {
+            return ContractRep.UpdateContract(ContextDB, model);
+        }
+
+        public Contract? EndContract(int clientId)
+        {
+            return ContractRep.EndContract(ContextDB, clientId);
+        }
     }
 }

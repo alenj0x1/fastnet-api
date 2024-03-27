@@ -1,4 +1,5 @@
 ﻿using fastnet_api.DBModels;
+using fastnet_api.Models.Users;
 using fastnet_api.Repository;
 using fastnet_api.Services;
 

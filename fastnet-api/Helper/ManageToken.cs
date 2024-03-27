@@ -23,6 +23,11 @@ namespace fastnet_api.Helper
         {
             int userId = _authorizationService.ReadToken(token);
 
+            if (userId < 0)
+            {
+                return null;
+            }
+
             return UserRep.GetUserById(ContextDB, userId);
         }
     }

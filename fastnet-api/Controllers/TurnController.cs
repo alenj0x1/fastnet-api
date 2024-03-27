@@ -116,11 +116,6 @@ namespace fastnet_api.Controllers
                 return NotFound("turn invalid");
             }
 
-            if (TryTakeTurn.AttentionstatusStatusid == 2)
-            {
-                return NotFound("turn taked.");
-            }
-
             return Ok(TryTakeTurn);
         }
 

@@ -10,7 +10,7 @@ namespace fastnet_api.Repository
         public int? NewAttention(FastnetdbContext ContextDB, NewAttentionRequestModel model)
         {
             if (model.ClientId != null) {
-                Attention? FindAttentionActive = ContextDB.Attentions.FirstOrDefault(x => x.ClientClientid == model.ClientId);
+                Attention? FindAttentionActive = ContextDB.Attentions.FirstOrDefault(x => x.ClientClientid == model.ClientId && x.AttentionstatusStatusid == 1);
                 Client? FindClient = ContextDB.Clients.SingleOrDefault(x => x.Clientid == model.ClientId);
                 
                 if (FindClient == null)
@@ -76,7 +76,7 @@ namespace fastnet_api.Repository
 
         public Attention? GetAttentionByClientId(FastnetdbContext ContextDB, int clientId)
         {
-            return ContextDB.Attentions.SingleOrDefault(x => x.ClientClientid == clientId);
+            return ContextDB.Attentions.SingleOrDefault(x => x.ClientClientid == clientId && x.AttentionstatusStatusid == 1);
         }
 
         public int? CloseAttention(FastnetdbContext ContextDB, int attentionId)

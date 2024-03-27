@@ -238,20 +238,27 @@ public partial class FastnetdbContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Paymentid).HasName("PK__payments__AF26EBEE2EE5F3E6");
+            entity.HasKey(e => e.Paymentid).HasName("PK__payments__AF26EBEE6B8185EB");
 
             entity.ToTable("payments");
 
             entity.Property(e => e.Paymentid).HasColumnName("paymentid");
+            entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Clientid).HasColumnName("clientid");
+            entity.Property(e => e.Description)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("without description")
+                .HasColumnName("description");
             entity.Property(e => e.Paymentdate)
+                .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("paymentdate");
 
             entity.HasOne(d => d.Client).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.Clientid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__payments__client__4D94879B");
+                .HasConstraintName("FK__payments__client__04E4BC85");
         });
 
         modelBuilder.Entity<Rol>(entity =>

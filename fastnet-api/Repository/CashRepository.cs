@@ -1,4 +1,5 @@
 ﻿using fastnet_api.DBModels;
+using fastnet_api.Models.Users;
 
 namespace fastnet_api.Repository
 {
@@ -42,9 +43,9 @@ namespace fastnet_api.Repository
             return cash;
         }
 
-        public Cash? AssignCash(FastnetdbContext contextDB, int cashId, int userId)
+        public Cash? AssignCash(FastnetdbContext contextDB, AssignCashRequestModel model)
         {
-            List<Cash> FindCashes = contextDB.Cashes.ToList();
+            List<Cash> FindCashes = GetCashes(contextDB);
 
             // Without cashes
             if (FindCashes.Count == 0)
@@ -52,7 +53,7 @@ namespace fastnet_api.Repository
                 return null;
             }
 
-            Cash? FindCash = FindCashes.SingleOrDefault(x => x.Cashid == cashId);
+            Cash? FindCash = GetCashById(contextDB, model.cashId);
 
             // Invalid cash
             if (FindCash == null)
@@ -61,25 +62,33 @@ namespace fastnet_api.Repository
             }
 
             // Update status of cash
-            FindCash.Active = true;
+            if (FindCash.Active == false)
+            {
+                FindCash.Active = true;
+            }
 
-            Usercash? FindUserCash = contextDB.Usercashes.SingleOrDefault(x => x.UserUserid == userId);
+            Usercash? FindUserCash = contextDB.Usercashes.SingleOrDefault(x => x.UserUserid == model.userId);
+            List<Usercash> FindCashesUsers = contextDB.Usercashes.Where(x => x.CashCashid == model.cashId).ToList();
+
+            // Cash max 3 users
+            if (FindCashesUsers.Count == 3)
+            {
+                return null;
+            }
 
             // Update user cash
             if (FindUserCash != null) {
-                FindUserCash.CashCashid = cashId;
-
-                contextDB.SaveChanges();
-
-                return FindCash;
+                contextDB.Usercashes.Remove(FindUserCash);
             }
 
             // create and add new usercash
-            var newUserCash = contextDB.Usercashes.Add(new Usercash {
-                UserUserid = userId,
-                CashCashid = cashId
-            });
+            Usercash newUserCash = new()
+            {
+                UserUserid = model.userId,
+                CashCashid = model.cashId,
+            };
 
+            contextDB.Usercashes.Add(newUserCash);
             contextDB.SaveChanges();
 
             return FindCash;
