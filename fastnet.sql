@@ -78,7 +78,7 @@ GO
 CREATE TABLE payments (
 	paymentid INT IDENTITY PRIMARY KEY,
 	paymentdate DATETIME DEFAULT CURRENT_TIMESTAMP,
-	amount INT NOT NULL,
+	amount FLOAT NOT NULL,
 	description VARCHAR(50) DEFAULT 'without description',
 	clientid INT NOT NULL,
 	FOREIGN KEY (clientid) REFERENCES client(clientid)
