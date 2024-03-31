@@ -134,5 +134,13 @@ namespace fastnet_api.Controllers
 
             return Ok("user removed");
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("me")]
+        public ActionResult<User?> MeUser()
+        {
+            return new ManageToken(HttpContext, _authorizationService).GetUser();
+        }
     }
 }

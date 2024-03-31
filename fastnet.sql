@@ -256,11 +256,6 @@ INSERT INTO users (username, email, password, rol_rolid)
 VALUES ('sa', 'sa@fasnet.com', 'sa', 1)
 GO
 
--- Client
-INSERT INTO client (name, lastname, identification, email, phonenumber, address, referenceaddress)
-VALUES ('John', 'Doe', '2639687412', 'john@mail.com', '09638574565', 'in the sun', 'sun')
-GO
-
 -- Cash
 INSERT INTO cash (active)
 VALUES (1)

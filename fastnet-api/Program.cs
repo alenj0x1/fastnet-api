@@ -59,12 +59,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 
-app.UseAuthorization();
-
 app.UseCors(policy =>
     policy.AllowAnyOrigin()
           .AllowAnyMethod()
           .AllowAnyHeader());
+
+app.UseAuthorization();
 
 app.MapControllers();
 
